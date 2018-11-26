@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  ipfsjs-gcs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    working_dir: /usr/app
+    environment:
+      - PORT=${PORT}
+    ports:
+      - 4002:4002
+      - 4003:4003
+      - 5002:5002
+      - 9090:9090
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/usr/app
+    command: npm run dev:docker
