@@ -29,10 +29,10 @@ const upload = (ipfs) => async (req, res) => {
   res.json(result)
 }
 
-const supload = (ipfs, defailtFileKey) => async (req, res) => {
+const supload = (ipfs, defaultFileKey) => async (req, res) => {
   const files = req.files
   const fileKey = req.query.fileKey
-  const result = await doUpload(ipfs, files.upload.name, files.upload.data, fileKey || defailtFileKey)
+  const result = await doUpload(ipfs, files.upload.name, files.upload.data, fileKey || defaultFileKey)
   console.log(result)
   res.json(result)
 }
@@ -52,11 +52,11 @@ const download = (ipfs) => async (req, res) => {
     .pipe(res)
 }
 
-const sdownload = (ipfs, defailtFileKey) => async (req, res) => {
+const sdownload = (ipfs, defaultFileKey) => async (req, res) => {
   const startTime = Date.now()
   const ipfspath = req.path
   const fileKey = req.query.fileKey
-  const aesCrypto = AESCrypto(fileKey || defailtFileKey)
+  const aesCrypto = AESCrypto(fileKey || defaultFileKey)
 
   try {
     const readStream = ipfs.files.catReadableStream(ipfspath)
